@@ -46,8 +46,8 @@ const Faqs: NextPage<FaqsProps> = ({ faqs }: FaqsProps) => {
 
 export default Faqs;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await faqsData;
+export const getStaticProps: GetStaticProps = () => {
+  const data = faqsData;
 
   return {
     props: {
