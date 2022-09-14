@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import faqsData from "../data/faqs.json";
@@ -9,17 +9,14 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-type FaqsProps = {
-  faqs: IFaq[];
-};
-
-const Faqs: NextPage<FaqsProps> = ({ faqs }: FaqsProps) => {
+const Faqs: NextPage = () => {
+  const faqs: IFaq[] = faqsData;
+  
   return (
     <>
       <Head>
         <title>MARVEL | FAQs</title>
         <meta name="description" content="Frequently asked questions" />
-        <link rel="icon" href="/favicon-marvel.ico" />
       </Head>
 
       <BodySingle title={"Preguntas Frecuentes"}>
@@ -45,13 +42,3 @@ const Faqs: NextPage<FaqsProps> = ({ faqs }: FaqsProps) => {
 };
 
 export default Faqs;
-
-export const getStaticProps: GetStaticProps = () => {
-  const data = faqsData;
-
-  return {
-    props: {
-      faqs: data,
-    },
-  };
-};
