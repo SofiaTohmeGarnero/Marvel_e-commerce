@@ -25,7 +25,7 @@ const Header: FC<Props> = ({variant}: Props) => {
             </NextLink>
             {variant == 'general' &&
                 <Box>
-                    <NextLink href="/" passHref>
+                    <NextLink href="/faqs" passHref>
                         <MUILink variant="body2" sx={{color: 'white', fontSize: 18, fontWeight: 600}}>FAQ</MUILink>
                     </NextLink>
                 </Box>
