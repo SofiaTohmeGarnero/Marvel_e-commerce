@@ -15,11 +15,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import ComicCard from "dh-marvel/components/cards/comic-card";
 
 const LIMIT = 12;
 const FIRST_OFFSET = 0;
 
-type IndexProps = {
+export type IndexProps = {
   comicsFirstRender: IComic[];
   totalComics: number;
 };
@@ -57,35 +58,8 @@ const Index: NextPage<IndexProps> = ({ comicsFirstRender, totalComics }) => {
 
       <BodySingle title={"Comics"}>
         <Grid container spacing={{ xs: 2, md: 3 }}>
-          {comics.map((comic, index) => (
-            <Grid xs={12} sm={6} md={4} key={index}>
-              <Card sx={{ maxWidth: 345, height: "100%", margin: "0 auto" }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                  alt={`img-${comic.title}`}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "calc(100% - 140px)",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <CardContent>
-                    <Typography gutterBottom variant="body1" component="div">
-                      {comic.title}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small">COMPRAR</Button>
-                    <Button size="small">VER DETALLE</Button>
-                  </CardActions>
-                </Box>
-              </Card>
-            </Grid>
+          {comics.map((comic: IComic, index: number) => (
+            <ComicCard comic={comic} key={index} />
           ))}
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "center", p: 3, m: 1 }}>
