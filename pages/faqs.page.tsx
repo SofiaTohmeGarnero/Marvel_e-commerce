@@ -8,6 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
 const Faqs: NextPage = () => {
   const faqs: IFaq[] = faqsData;
@@ -40,5 +41,7 @@ const Faqs: NextPage = () => {
     </>
   );
 };
+
+(Faqs as any).Layout = LayoutGeneral;
 
 export default Faqs;
