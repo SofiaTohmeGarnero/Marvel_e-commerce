@@ -39,7 +39,7 @@ const ComicCard: FC<ComicCardProps> = ({comic}) => {
           </CardContent>
           <CardActions>
             <Button size="small">COMPRAR</Button>
-            <Link href={`/comic/${comic.id}`}><Button size="small">VER DETALLE</Button></Link>
+            <Link href={`/comics/${comic.id}`}><Button size="small">VER DETALLE</Button></Link>
           </CardActions>
         </Box>
       </Card>
