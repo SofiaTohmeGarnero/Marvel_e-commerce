@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import Faqs from "dh-marvel/pages/faqs.page";
-import faqsData from "../data/faqs.json";
+import Faqs from "dh-marvel/pages/faqs/index.page";
+import faqsData from "../../data/faqs.json";
 
 describe("FaqsPage", () => {
   describe("when rendering default", () => {

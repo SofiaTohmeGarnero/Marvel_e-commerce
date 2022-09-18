@@ -8,11 +8,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import IComic from "types/IComic";
+import Link from "next/link";
 
 type ComicCardProps = {
     comic: IComic
 }
 const ComicCard: FC<ComicCardProps> = ({comic}) => {
+
   return (
     <Grid xs={12} sm={6} md={4}>
       <Card sx={{ maxWidth: 345, height: "100%", margin: "0 auto" }}>
@@ -37,7 +39,7 @@ const ComicCard: FC<ComicCardProps> = ({comic}) => {
           </CardContent>
           <CardActions>
             <Button size="small">COMPRAR</Button>
-            <Button size="small">VER DETALLE</Button>
+            <Link href={`/comic/${comic.id}`}><Button size="small">VER DETALLE</Button></Link>
           </CardActions>
         </Box>
       </Card>

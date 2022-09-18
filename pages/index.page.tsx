@@ -7,14 +7,7 @@ import { getComics } from "dh-marvel/services/marvel/marvel.service";
 import IComic from "types/IComic";
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
-import { Item } from "dh-marvel/styles/material-item";
 import { useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import ComicCard from "dh-marvel/components/cards/comic-card";
 
 const LIMIT = 12;
@@ -58,8 +51,8 @@ const Index: NextPage<IndexProps> = ({ comicsFirstRender, totalComics }) => {
 
       <BodySingle title={"Comics"}>
         <Grid container spacing={{ xs: 2, md: 3 }}>
-          {comics.map((comic: IComic, index: number) => (
-            <ComicCard comic={comic} key={index} />
+          {comics.map((comic: IComic) => (
+            <ComicCard comic={comic} key={comic.id} />
           ))}
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "center", p: 3, m: 1 }}>

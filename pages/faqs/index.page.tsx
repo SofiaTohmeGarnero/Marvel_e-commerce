@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
-import faqsData from "../data/faqs.json";
+import faqsData from "../../data/faqs.json";
 import IFaq from "types/IFaq";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";

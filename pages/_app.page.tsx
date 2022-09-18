@@ -1,15 +1,20 @@
 import type { AppProps } from "next/app";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "dh-marvel/styles/material-theme";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const LayoutComponent = (Component as any).Layout ;
+  const LayoutComponent = (Component as any).Layout;
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <LayoutComponent>
+      {LayoutComponent ? (
+        <LayoutComponent>
+          <Component {...pageProps} />
+        </LayoutComponent>
+      ) : (
         <Component {...pageProps} />
-      </LayoutComponent>
+      )}
       <style jsx global>{`
         /* Other global styles such as 'html, body' etc... */
 
@@ -20,5 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   );
 }
+
+(MyApp as any).Layout = LayoutGeneral;
 
 export default MyApp;
