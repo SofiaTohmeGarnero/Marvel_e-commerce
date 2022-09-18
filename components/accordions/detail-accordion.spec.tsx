@@ -1,7 +1,6 @@
 import IComic from "types/IComic";
 import DetailAccordion from "dh-marvel/components/accordions/detail-accordion";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event"
 
 const itemMockComplete: IComic = {
   id: 1158,

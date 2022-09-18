@@ -21,7 +21,9 @@
       "dh-marvel/features/*": ["features/*"],
       "dh-marvel/pages/*": ["pages/*"],
       "dh-marvel/styles/*": ["styles/*"],
-      "dh-marvel/test/*": ["test/*"]
+      "dh-marvel/test/*": ["test/*"],
+      "dh-marvel/types/*": ["types/*"],
+      "dh-marvel/data/*": ["data/*"]
     }
   },
   "include": [
