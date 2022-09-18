@@ -77,7 +77,7 @@ const CharacterDetail: NextPage<CharacterDetailProps> = ({ character, comics }) 
             </Accordion>
           </Grid>
         </Grid>
-        {comics.length > 0 && (
+        {comics && (
           <>
             <Box
               mt={6}

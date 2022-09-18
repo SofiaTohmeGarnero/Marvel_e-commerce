@@ -39,7 +39,7 @@ const Index: NextPage<IndexProps> = ({ comicsFirstRender, totalComics }) => {
       .catch((e) => {
         console.log(e);
       });
-  }, [page]);
+  }, [page, nextOffset]);
 
   return (
     <>
