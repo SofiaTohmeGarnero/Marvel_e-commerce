@@ -60,7 +60,7 @@ describe("DetailCard", () => {
     });
   });
 
-  describe("when rendering a comic with stock", () => {
+  describe("when rendering a comic without stock", () => {
     it("should show a button that says out of stock", () => {
       render(<DetailCard item={itemMockIncomplete} />);
       const button = screen.getByText(/Sin stock disponible/i);
@@ -76,8 +76,8 @@ describe("DetailCard", () => {
       expect(price).toBeInTheDocument();
     });
   });
-  describe("when rendering a comic whose current price is different to the older", () => {
-    it("should render both of prices", () => {
+  describe("when rendering a comic whose current price is equal to the older", () => {
+    it("should render only the current price", () => {
       render(<DetailCard item={itemMockIncomplete} />);
       const oldPrice = screen.queryByText(
         `Antes $${itemMockIncomplete.oldPrice}`

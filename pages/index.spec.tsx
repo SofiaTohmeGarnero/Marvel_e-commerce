@@ -5,6 +5,14 @@ import IComic from "types/IComic";
 const comicsFirstRenderMock:IComic[] = [
   {
     id: 22582,
+    characters: {
+      items: [],
+    },
+    description: "",
+    format: "",
+    oldPrice: 48,
+    price: 48,
+    stock: 0,
     thumbnail: {
       extension: "http://i.annihil.us/u/prod/marvel/i/mg/8/c0/51dda501724ed",
       path: "jpg",
@@ -13,6 +21,14 @@ const comicsFirstRenderMock:IComic[] = [
   },
   {
     id: 17486,
+    characters: {
+      items: [],
+    },
+    description: "",
+    format: "",
+    oldPrice: 48,
+    price: 48,
+    stock: 0,
     thumbnail: {
       extension: "http://i.annihil.us/u/prod/marvel/i/mg/6/50/4c3645d0d29e3",
       path: "jpg",
