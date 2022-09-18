@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import Index from "dh-marvel/pages/index.page";
+import IComic from "types/IComic";
 
-const comicsFirstRenderMock = [
+const comicsFirstRenderMock:IComic[] = [
   {
     id: 22582,
     thumbnail: {

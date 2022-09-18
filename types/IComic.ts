@@ -4,14 +4,14 @@ export interface IItem {
 }
 export default interface IComic {
   id: number;
-  characters:{
+  characters?:{
     items: IItem[]
   };
-  description: string;
-  format: string;
-  oldPrice: number;
-  price: number;
-  stock: number;
+  description?: string;
+  format?: string;
+  oldPrice?: number;
+  price?: number;
+  stock?: number;
   title: string;
   thumbnail: {
     extension:  string,
