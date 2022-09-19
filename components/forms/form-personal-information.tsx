@@ -11,11 +11,11 @@ import StepperNavigation from "dh-marvel/components/forms/navigation/stepper-nav
 import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 
 const FormPersonalInformation: FC = () => {
-  const { state, dispatch } = useContext(StepperContext);
+  const { dispatch } = useContext(StepperContext);
   const methods = useForm<PersonalInformationData>({
     resolver: yupResolver(SchemaPersonalInformation),
     defaultValues: {
-      firstname: "Pepe",
+      name: "Pepe",
       lastname: "Pepardo",
       email: "pepe@dh.com",
     },
@@ -28,7 +28,7 @@ const FormPersonalInformation: FC = () => {
   };
 
   useEffect(() => {
-    setFocus("firstname");
+    setFocus("name");
   }, []);
 
   return (
@@ -36,7 +36,7 @@ const FormPersonalInformation: FC = () => {
       <h4>Datos personales</h4>
       <form>
         <FormProvider {...methods}>
-          <ControlledTextInput name="firstname" label="Nombre" />
+          <ControlledTextInput name="name" label="Nombre" />
           <ControlledTextInput name="lastname" label="Apellido" />
           <ControlledTextInput name="email" label="Email" />
         </FormProvider>

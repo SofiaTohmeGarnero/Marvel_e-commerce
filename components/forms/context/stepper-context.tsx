@@ -50,9 +50,27 @@ const reducer = (state:any, action:any) => {
           ...state.checkout,
           customer: {
             ...state.checkout.customer,
-            firstname: action.payload.firstname,
+            name: action.payload.name,
             lastname: action.payload.lastname,
             email: action.payload.email
+          }
+        }
+      };
+    case "NEXT_STEP_ADDRESS":
+      return {
+        ...state,
+        activeStep: state.activeStep + 1,
+        checkout:{
+          ...state.checkout,
+          customer: {
+            ...state.checkout.customer,
+            address: {
+              address1: action.payload.address1,
+              address2: action.payload.address2,
+              city: action.payload.city,
+              state: action.payload.state,
+              zipCode: action.payload.zipCode
+            }
           }
         }
       };
