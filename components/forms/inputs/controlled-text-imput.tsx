@@ -6,12 +6,14 @@ type ControlledTextInputProps = {
   name: string;
   label: string;
   defaultValue?: string;
+  inputType?: string;
 };
 
 const ControlledTextInput: FC<ControlledTextInputProps> = ({
   name,
   label,
   defaultValue,
+  inputType
 }: ControlledTextInputProps) => {
   const { control } = useFormContext();
   const {
@@ -34,6 +36,7 @@ const ControlledTextInput: FC<ControlledTextInputProps> = ({
         fullWidth
         error={!!errors[name]}
         helperText={`${errors[name]?.message || ""}`}
+        type={inputType}
       />
     </Box>
   );

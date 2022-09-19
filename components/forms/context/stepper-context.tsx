@@ -37,11 +37,6 @@ const initialState = {
 
 const reducer = (state:any, action:any) => {
   switch (action.type) {
-    case "NEXT_STEP":
-      return {
-        ...state,
-        activeStep: state.activeStep + 1,
-      };
     case "NEXT_STEP_PERSONAL":
       return {
         ...state,
@@ -74,20 +69,24 @@ const reducer = (state:any, action:any) => {
           }
         }
       };
+      case "NEXT_STEP_PAYMENT":
+        return {
+          ...state,
+          activeStep: 0,
+          checkout:{
+            ...state.checkout,
+            card: {
+              number: action.payload.number,
+              cvc: action.payload.cvc,
+              expDate: action.payload.expDate,
+              nameOnCard: action.payload.nameOnCard
+            }
+          }
+        };
     case "PREV_STEP":
       return {
         ...state,
         activeStep: state.activeStep - 1,
-      };
-    case "LATEST_STEP":
-      return {
-        ...state,
-        activeStep: 0,
-      };
-    case "LATEST_STEP":
-      return {
-        ...state,
-        activeStep: 0,
       };
     default:
       return state;

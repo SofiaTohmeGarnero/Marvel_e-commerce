@@ -2,6 +2,7 @@ import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { FC, useContext } from "react";
 import FormPersonalInformation from "dh-marvel/components/forms/form-personal-information";
 import FormAddress from "dh-marvel/components/forms/form-address";
+import FormPayment from "dh-marvel/components/forms/form-payment";
 import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 
 
@@ -29,7 +30,7 @@ const FormCheckout: FC = () => {
           </Stepper>
           {activeStep === 0 && <FormPersonalInformation />}
           {activeStep === 1 && <FormAddress />}
-          {activeStep === 2 && <div>Finalizado</div>}
+          {activeStep === 2 && <FormPayment />}
       </Box>
     </>
   );
