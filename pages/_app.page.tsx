@@ -3,6 +3,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "dh-marvel/styles/material-theme";
 import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 import Head from "next/head";
+import StepperProvider from "dh-marvel/components/forms/context/stepper-context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const LayoutComponent = (Component as any).Layout;
@@ -13,13 +14,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {LayoutComponent ? (
-          <LayoutComponent>
+        <StepperProvider>
+          {LayoutComponent ? (
+            <LayoutComponent>
+              <Component {...pageProps} />
+            </LayoutComponent>
+          ) : (
             <Component {...pageProps} />
-          </LayoutComponent>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </StepperProvider>
         <style jsx global>{`
           /* Other global styles such as 'html, body' etc... */
 

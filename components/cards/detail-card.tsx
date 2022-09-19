@@ -1,4 +1,6 @@
 import type { FC } from "react";
+import { useContext } from "react";
+import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 import IComic from "types/IComic";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
@@ -15,6 +17,10 @@ type DetailCardProps = {
   item: IComic;
 };
 const DetailCard: FC<DetailCardProps> = ({ item }) => {
+  const { dispatch } = useContext(StepperContext);
+  const handleClick = () => {
+    dispatch({ type: "UPLOAD_ORDER", payload: item });
+  }
   return (
     <>
       <Grid xs={12} md={6} sx={{ textAlign: "center" }}>
@@ -54,6 +60,7 @@ const DetailCard: FC<DetailCardProps> = ({ item }) => {
                 disabled={!item.stock}
                 endIcon={item.stock ? <AddShoppingCartIcon /> : null}
                 sx={{ width: "100%", mb: 2 }}
+                onClick={handleClick}
               >
                 {item.stock ? "Comprar" : "Sin stock disponible"}
               </Button>

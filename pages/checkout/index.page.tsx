@@ -4,9 +4,12 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
 import Grid from "@mui/material/Unstable_Grid2";
 import FormCheckout from "dh-marvel/components/forms/form-checkout";
-import StepperProvider from "dh-marvel/components/forms/context/stepper-context";
+import React, { useContext } from "react";
+import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 
 const Checkout: NextPage = () => {
+  const { state } = useContext(StepperContext);
+
   return (
     <>
       <Head>
@@ -14,16 +17,14 @@ const Checkout: NextPage = () => {
         <meta name="checkout form" content="Form to make the buyout" />
       </Head>
 
-      <BodySingle title={`Checkout: `}>
+      <BodySingle title={`Checkout: ${state.checkout.order.name}`}>
         <Grid container>
           <Grid xs={12} md={3}>
             Card
           </Grid>
-          <StepperProvider>
-            <Grid xs={12} md={9}>
-              <FormCheckout />
-            </Grid>
-          </StepperProvider>
+          <Grid xs={12} md={9}>
+            <FormCheckout />
+          </Grid>
         </Grid>
       </BodySingle>
     </>

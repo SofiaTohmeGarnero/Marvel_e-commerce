@@ -10,7 +10,7 @@ const StepperNavigation: FC<StepperNavigationProps> = ({ onNextClick }) => {
   const { state, dispatch } = useContext(StepperContext);
   const { activeStep } = state;
   return (
-    <Stack mt={2} direction="row" justifyContent="space-between">
+    <Stack mt={2} mb={2} direction="row" justifyContent="space-between">
       {activeStep !== 0 && (
         <Button onClick={() => dispatch({ type: "PREV_STEP" })}>
           Anterior

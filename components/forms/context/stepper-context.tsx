@@ -1,13 +1,19 @@
-import { createContext, Dispatch, ReducerStateWithoutAction, useReducer } from "react";
+import {
+  createContext,
+  Dispatch,
+  useReducer,
+} from "react";
 import { CheckoutInput } from "dh-marvel/types/checkout.types";
 
 export type TReducerState = {
-  activeStep: number,
-  checkout: CheckoutInput
-}
+  activeStep: number;
+  checkout: CheckoutInput;
+  comicId: number
+};
 
 const initialState = {
   activeStep: 0,
+  comicId: 0,
   checkout: {
     customer: {
       name: "",
@@ -30,32 +36,46 @@ const initialState = {
     order: {
       name: "",
       image: "",
-      price: 0
+      price: 0,
     },
   },
 };
 
-const reducer = (state:any, action:any) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
+    case "UPLOAD_ORDER":
+      return {
+        ...state,
+        activeStep: 0,
+        comicId: action.payload.id,
+        checkout: {
+          ...state.checkout,
+          order: {
+            name: action.payload.title,
+            image: action.payload.thumbnail.path + '.' + action.payload.thumbnail.extension,
+            price: action.payload.price,
+          },
+        },
+      };
     case "NEXT_STEP_PERSONAL":
       return {
         ...state,
         activeStep: state.activeStep + 1,
-        checkout:{
+        checkout: {
           ...state.checkout,
           customer: {
             ...state.checkout.customer,
             name: action.payload.name,
             lastname: action.payload.lastname,
-            email: action.payload.email
-          }
-        }
+            email: action.payload.email,
+          },
+        },
       };
     case "NEXT_STEP_ADDRESS":
       return {
         ...state,
         activeStep: state.activeStep + 1,
-        checkout:{
+        checkout: {
           ...state.checkout,
           customer: {
             ...state.checkout.customer,
@@ -64,25 +84,24 @@ const reducer = (state:any, action:any) => {
               address2: action.payload.address2,
               city: action.payload.city,
               state: action.payload.state,
-              zipCode: action.payload.zipCode
-            }
-          }
-        }
+              zipCode: action.payload.zipCode,
+            },
+          },
+        },
       };
-      case "NEXT_STEP_PAYMENT":
-        return {
-          ...state,
-          activeStep: 0,
-          checkout:{
-            ...state.checkout,
-            card: {
-              number: action.payload.number,
-              cvc: action.payload.cvc,
-              expDate: action.payload.expDate,
-              nameOnCard: action.payload.nameOnCard
-            }
-          }
-        };
+    case "NEXT_STEP_PAYMENT":
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          card: {
+            number: action.payload.number,
+            cvc: action.payload.cvc,
+            expDate: action.payload.expDate,
+            nameOnCard: action.payload.nameOnCard,
+          },
+        },
+      };
     case "PREV_STEP":
       return {
         ...state,
@@ -101,9 +120,11 @@ export const StepperContext = createContext<{
   dispatch: () => null,
 });
 
-export default function StepperProvider({ children }:any) {
+export default function StepperProvider({ children }: any) {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <StepperContext.Provider value={{state, dispatch}}> {children} </StepperContext.Provider>
+    <StepperContext.Provider value={{ state, dispatch }}>
+      {children}
+    </StepperContext.Provider>
   );
 }

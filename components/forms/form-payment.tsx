@@ -12,9 +12,13 @@ import {
 } from "dh-marvel/components/forms/yup-schemas/schema-payment";
 import "react-credit-cards/es/styles-compiled.css";
 import Cards from "react-credit-cards";
+import Alert from "@mui/material/Alert";
+import { useRouter } from "next/router";
 
 const FormPayment: FC = () => {
-  const { dispatch } = useContext(StepperContext);
+  const router = useRouter();
+  const { state, dispatch } = useContext(StepperContext);
+  const [error, setError] = useState("");
   const [cardFields, setCardFields] = useState<PaymentData>({
     number: "",
     cvc: "",
@@ -24,16 +28,37 @@ const FormPayment: FC = () => {
   const methods = useForm<PaymentData>({
     resolver: yupResolver(SchemaPayment),
     defaultValues: {
-      number: "",
-      cvc: "",
-      expDate: "",
-      nameOnCard: "",
+      number: "4242424242424242",
+      cvc: "123",
+      expDate: "12/29",
+      nameOnCard: "Pepe pepardo",
     },
   });
   const { setFocus, handleSubmit, watch } = methods;
 
   const onSubmit: any = (data: PaymentData) => {
     dispatch({ type: "NEXT_STEP_PAYMENT", payload: data });
+    const url = "/api/checkout";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(state.checkout),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const apiError = JSON.stringify(data.message);
+        if (apiError !== undefined) {
+          setError(apiError);
+          return;
+        }
+        setError("");
+        router.push("/confirmacion-compra");
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
   };
 
   useEffect(() => {
@@ -74,15 +99,16 @@ const FormPayment: FC = () => {
           </Grid>
           <Grid xs={12} md={6} lg={4}>
             <Cards
-              number={!!cardFields.number ? parseInt(cardFields.number) : ''}
-              cvc={!!cardFields.cvc ? cardFields.cvc : ''}
-              expiry={!!cardFields.expDate ? cardFields.expDate : ''}
-              name={!!cardFields.nameOnCard ? cardFields.nameOnCard : ''}
+              number={!!cardFields.number ? parseInt(cardFields.number) : ""}
+              cvc={!!cardFields.cvc ? cardFields.cvc : ""}
+              expiry={!!cardFields.expDate ? cardFields.expDate : ""}
+              name={!!cardFields.nameOnCard ? cardFields.nameOnCard : ""}
             />
           </Grid>
         </Grid>
       </FormProvider>
       <StepperNavigation onNextClick={handleSubmit(onSubmit)} />
+      {error && <Alert severity="error">{error}</Alert>}
     </Stack>
   );
 };
