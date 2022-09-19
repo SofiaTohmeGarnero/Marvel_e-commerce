@@ -42,11 +42,11 @@ const FormAddress: FC = () => {
             label="Departamento, piso, etc"
           />
           <ControlledTextInput name="city" label="Ciudad" />
-          <Grid container columnSpacing={2}>
-            <Grid xs={12} md={9}>
+          <Grid container>
+            <Grid xs={6} md={9} p={'0 16px 0 0'}>
               <ControlledTextInput name="state" label="Provincia" />
             </Grid>
-            <Grid xs={12} md={3}>
+            <Grid xs={6} md={3} p={0}>
               <ControlledTextInput name="zipCode" label="Cod postal" />
             </Grid>
           </Grid>

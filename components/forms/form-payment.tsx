@@ -83,18 +83,14 @@ const FormPayment: FC = () => {
                 label="Nombre como aparece en la tarjeta"
               />
               <ControlledTextInput name="number" label="Número de tarjeta" />
-              <Grid container columnSpacing={2}>
-                <Grid xs={12} md={6}>
-                  <ControlledTextInput name="expDate" label="Exp MM/YY" />
-                </Grid>
-                <Grid xs={12} md={6}>
-                  <ControlledTextInput
-                    name="cvc"
-                    label="CVC"
-                    inputType="password"
-                  />
-                </Grid>
-              </Grid>
+              <Stack direction="row" spacing={2} sx={{width:'100%'}}>
+                <ControlledTextInput name="expDate" label="Exp MM/YY" />
+                <ControlledTextInput
+                  name="cvc"
+                  label="CVC"
+                  inputType="password"
+                />
+              </Stack>
             </form>
           </Grid>
           <Grid xs={12} md={6} lg={4}>

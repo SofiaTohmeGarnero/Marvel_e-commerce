@@ -27,7 +27,7 @@ const ControlledTextInput: FC<ControlledTextInputProps> = ({
   });
 
   return (
-    <Box mb={2}>
+    <Box mb={2} sx={{width:'100%'}}>
       <TextField
         onChange={onChange}
         value={value}
