@@ -3,11 +3,21 @@ import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
 import FormCheckout from "dh-marvel/components/forms/form-checkout";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
+import { useRouter } from "next/router";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Checkout: NextPage = () => {
   const { state } = useContext(StepperContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!state.comicId) {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <>
@@ -15,10 +25,15 @@ const Checkout: NextPage = () => {
         <title>MARVEL | Checkout</title>
         <meta name="checkout form" content="Form to make the buyout" />
       </Head>
-
-      <BodySingle title={`Checkout: ${state.checkout.order.name}`}>
-        <FormCheckout />
-      </BodySingle>
+      {state.comicId ? (
+        <BodySingle title={`Checkout: ${state.checkout.order.name}`}>
+          <FormCheckout />
+        </BodySingle>
+      ) : (
+        <Box sx={{ marginTop: "16px", width: "100%", textAlign: "center" }}>
+          <CircularProgress />
+        </Box>
+      )}
     </>
   );
 };

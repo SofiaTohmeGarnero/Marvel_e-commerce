@@ -22,8 +22,8 @@ const CheckoutCard: FC = () => {
         />
         <Stack
           flexDirection="column"
-          justifyContent="space-between"
-          sx={{ height: "calc(100% - 350px)", textAlign: "center"}}
+          justifyContent="center"
+          sx={{ height: "calc(100% - 450px)", textAlign: "center"}}
         >
           <CardContent>
             <Typography variant="body1" component="div" fontWeight={600}>
