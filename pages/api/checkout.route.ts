@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {CheckoutInput} from "dh-marvel/features/checkout/checkout.types";
+import {CheckoutInput} from "dh-marvel/types/checkout.types";
 import {
     ERROR_CARD_DATA_INCORRECT,
     ERROR_CARD_WITHOUT_AUTHORIZATION,

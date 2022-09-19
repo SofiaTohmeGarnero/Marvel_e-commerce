@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -11,10 +11,9 @@ import IComic from "types/IComic";
 import Link from "next/link";
 
 type ComicCardProps = {
-    comic: IComic
-}
-const ComicCard: FC<ComicCardProps> = ({comic}) => {
-
+  comic: IComic;
+};
+const ComicCard: FC<ComicCardProps> = ({ comic }) => {
   return (
     <Grid xs={12} sm={6} md={4}>
       <Card sx={{ maxWidth: 345, height: "100%", margin: "0 auto" }}>
@@ -24,13 +23,10 @@ const ComicCard: FC<ComicCardProps> = ({comic}) => {
           image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
           alt={`img-${comic.title}`}
         />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            height: "calc(100% - 140px)",
-            justifyContent: "space-between",
-          }}
+        <Stack
+          flexDirection="column"
+          justifyContent="space-between"
+          sx={{ height: "calc(100% - 140px)" }}
         >
           <CardContent>
             <Typography gutterBottom variant="body1" component="div">
@@ -39,9 +35,11 @@ const ComicCard: FC<ComicCardProps> = ({comic}) => {
           </CardContent>
           <CardActions>
             <Button size="small">COMPRAR</Button>
-            <Link href={`/comics/${comic.id}`}><Button size="small">VER DETALLE</Button></Link>
+            <Link href={`/comics/${comic.id}`}>
+              <Button size="small">VER DETALLE</Button>
+            </Link>
           </CardActions>
-        </Box>
+        </Stack>
       </Card>
     </Grid>
   );
