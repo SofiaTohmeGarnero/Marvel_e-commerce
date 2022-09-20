@@ -19,12 +19,7 @@ const FormPayment: FC = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(StepperContext);
   const [error, setError] = useState("");
-  const [cardFields, setCardFields] = useState<PaymentData>({
-    number: "",
-    cvc: "",
-    expDate: "",
-    nameOnCard: "",
-  });
+
   const methods = useForm<PaymentData>({
     resolver: yupResolver(SchemaPayment),
     defaultValues: {
@@ -35,6 +30,10 @@ const FormPayment: FC = () => {
     },
   });
   const { setFocus, handleSubmit, watch } = methods;
+  const nameOnCard = watch("nameOnCard");
+  const expDate = watch("expDate");
+  const number = watch("number");
+  const cvc = watch("cvc");
 
   const onSubmit: any = (data: PaymentData) => {
     dispatch({ type: "NEXT_STEP_PAYMENT", payload: data });
@@ -65,12 +64,6 @@ const FormPayment: FC = () => {
     setFocus("nameOnCard");
   }, []);
 
-  useEffect(() => {
-    watch((data: any) => {
-      setCardFields(data);
-    });
-  }, [watch]);
-
   return (
     <Stack>
       <h4>Datos del pago</h4>
@@ -95,10 +88,10 @@ const FormPayment: FC = () => {
           </Grid>
           <Grid xs={12} md={6} lg={4}>
             <Cards
-              number={!!cardFields.number ? parseInt(cardFields.number) : ""}
-              cvc={!!cardFields.cvc ? cardFields.cvc : ""}
-              expiry={!!cardFields.expDate ? cardFields.expDate : ""}
-              name={!!cardFields.nameOnCard ? cardFields.nameOnCard : ""}
+              number={number}
+              cvc={cvc}
+              expiry={expDate}
+              name={nameOnCard}
             />
           </Grid>
         </Grid>
