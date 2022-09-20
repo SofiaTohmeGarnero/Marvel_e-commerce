@@ -107,6 +107,19 @@ const reducer = (state: any, action: any) => {
         ...state,
         activeStep: state.activeStep - 1,
       };
+    case "CONFIRM_PURCHASE":
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          card: {
+            number: "",
+            cvc: "",
+            expDate: "",
+            nameOnCard: "",
+          },
+        }
+      };
     default:
       return state;
   }

@@ -40,14 +40,17 @@ const FormPayment: FC = () => {
   const cvc = watch("cvc");
 
   const onSubmit: any = (data: PaymentData) => {
-    dispatch({ type: "NEXT_STEP_PAYMENT", payload: data });
+    const order = {
+      ...state.checkout, card: data
+    };
+    
     const url = "/api/checkout";
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(state.checkout),
+      body: JSON.stringify(order),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -57,6 +60,7 @@ const FormPayment: FC = () => {
           return;
         }
         setError("");
+        dispatch({ type: "CONFIRM_PURCHASE" });
         router.push("/confirmacion-compra");
       })
       .catch((e) => {
@@ -80,7 +84,7 @@ const FormPayment: FC = () => {
                 label="Nombre como aparece en la tarjeta"
               />
               <ControlledTextInput name="number" label="Número de tarjeta" />
-              <Stack direction="row" spacing={2} sx={{width:'100%'}}>
+              <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
                 <ControlledTextInput name="expDate" label="Exp MM/YY" />
                 <ControlledTextInput
                   name="cvc"
