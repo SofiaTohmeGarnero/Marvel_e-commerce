@@ -9,9 +9,13 @@ export const SchemaPayment = yup
   })
   .required();
 
-export type PaymentData = {
+export type CardData = {
     number: string,
     cvc: string,
     expDate: string,
     nameOnCard: string
 };
+
+export type PaymentData = {
+  card: CardData
+}

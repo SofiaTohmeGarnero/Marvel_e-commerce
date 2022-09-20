@@ -1,7 +1,7 @@
 import { FC, useEffect, useContext } from "react";
 import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 import { FormProvider, useForm } from "react-hook-form";
-import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-imput";
+import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import StepperNavigation from "dh-marvel/components/forms/navigation/stepper-navigation";
 import { Stack } from "@mui/material";

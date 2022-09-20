@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { FC, useEffect, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-imput";
+import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   SchemaPersonalInformation,

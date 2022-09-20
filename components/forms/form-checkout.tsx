@@ -10,7 +10,6 @@ import CheckoutCard from "dh-marvel/components/cards/checkout-card";
 const FormCheckout: FC = () => {
   const { state } = useContext(StepperContext);
   const { activeStep } = state;
-  console.log(state);
 
   return (
     <>

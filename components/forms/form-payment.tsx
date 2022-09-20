@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useContext, useState } from "react";
 import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 import { FormProvider, useForm } from "react-hook-form";
-import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-imput";
+import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import StepperNavigation from "dh-marvel/components/forms/navigation/stepper-navigation";
 import { Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import {
+  CardData,
   PaymentData,
   SchemaPayment,
 } from "dh-marvel/components/forms/yup-schemas/schema-payment";
@@ -14,29 +15,34 @@ import "react-credit-cards/es/styles-compiled.css";
 import Cards from "react-credit-cards";
 import Alert from "@mui/material/Alert";
 import { useRouter } from "next/router";
+import ControlledCardInputs from "dh-marvel/components/forms/inputs/controlled-card-inputs";
 
 const FormPayment: FC = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(StepperContext);
   const [error, setError] = useState("");
-  const [cardFields, setCardFields] = useState<PaymentData>({
-    number: "",
-    cvc: "",
-    expDate: "",
-    nameOnCard: "",
-  });
+  console.log(state);
+
   const methods = useForm<PaymentData>({
-    resolver: yupResolver(SchemaPayment),
+    //resolver: yupResolver(SchemaPayment),
     defaultValues: {
-      number: "4242424242424242",
-      cvc: "123",
-      expDate: "12/29",
-      nameOnCard: "Pepe pepardo",
+      card: {
+        number: "4242424242424242",
+        cvc: "123",
+        expDate: "12/29",
+        nameOnCard: "Pepe pepardo",
+      },
     },
   });
+  /* const {neastedMethods} = useForm<CardData>({
+    resolver: yupResolver(SchemaPayment),
+    },
+  }); */
   const { setFocus, handleSubmit, watch } = methods;
+  const card = watch("card");
 
   const onSubmit: any = (data: PaymentData) => {
+    console.log('Hola'+ data);
     dispatch({ type: "NEXT_STEP_PAYMENT", payload: data });
     const url = "/api/checkout";
     fetch(url, {
@@ -61,49 +67,31 @@ const FormPayment: FC = () => {
       });
   };
 
-  useEffect(() => {
-    setFocus("nameOnCard");
-  }, []);
-
-  useEffect(() => {
-    watch((data: any) => {
-      setCardFields(data);
-    });
-  }, [watch]);
-
+  /*  useEffect(() => {
+    setFocus('nameOnCard');
+  }, []); 
+ */
   return (
     <Stack>
       <h4>Datos del pago</h4>
-      <FormProvider {...methods}>
-        <Grid container spacing={2}>
-          <Grid xs={12} md={6} lg={8}>
-            <form>
-              <ControlledTextInput
-                name="nameOnCard"
-                label="Nombre como aparece en la tarjeta"
+        <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2}>
+            <Grid xs={12} md={6} lg={8}>
+              <ControlledCardInputs />
+            </Grid>
+            <Grid xs={12} md={6} lg={4}>
+              <Cards
+                number={card.number}
+                cvc={card.cvc}
+                expiry={card.expDate}
+                name={card.nameOnCard}
               />
-              <ControlledTextInput name="number" label="Número de tarjeta" />
-              <Stack direction="row" spacing={2} sx={{width:'100%'}}>
-                <ControlledTextInput name="expDate" label="Exp MM/YY" />
-                <ControlledTextInput
-                  name="cvc"
-                  label="CVC"
-                  inputType="password"
-                />
-              </Stack>
-            </form>
+            </Grid>
           </Grid>
-          <Grid xs={12} md={6} lg={4}>
-            <Cards
-              number={!!cardFields.number ? parseInt(cardFields.number) : ""}
-              cvc={!!cardFields.cvc ? cardFields.cvc : ""}
-              expiry={!!cardFields.expDate ? cardFields.expDate : ""}
-              name={!!cardFields.nameOnCard ? cardFields.nameOnCard : ""}
-            />
-          </Grid>
-        </Grid>
-      </FormProvider>
+      </form>
       <StepperNavigation onNextClick={handleSubmit(onSubmit)} />
+        </FormProvider>
       {error && <Alert severity="error">{error}</Alert>}
     </Stack>
   );
