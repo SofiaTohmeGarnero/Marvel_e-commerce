@@ -23,10 +23,14 @@ const FormPayment: FC = () => {
   const methods = useForm<PaymentData>({
     resolver: yupResolver(SchemaPayment),
     defaultValues: {
-      number: "4242424242424242",
+      number: "",
+      cvc: "",
+      expDate: "",
+      nameOnCard: "",
+      /* number: "4242424242424242",
       cvc: "123",
       expDate: "12/29",
-      nameOnCard: "Pepe pepardo",
+      nameOnCard: "Pepe pepardo", */
     },
   });
   const { setFocus, handleSubmit, watch } = methods;

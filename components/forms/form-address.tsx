@@ -16,10 +16,14 @@ const FormAddress: FC = () => {
   const methods = useForm<AddressData>({
     resolver: yupResolver(SchemaAddress),
     defaultValues: {
-      address1: "Calle falsa 123",
+      address1: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      /* address1: "Calle falsa 123",
       city: "Mendoza",
       state: "Mendoza",
-      zipCode: "5500",
+      zipCode: "5500", */
     },
   });
   const { setFocus, handleSubmit } = methods;

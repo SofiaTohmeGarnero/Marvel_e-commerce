@@ -15,9 +15,12 @@ const FormPersonalInformation: FC = () => {
   const methods = useForm<PersonalInformationData>({
     resolver: yupResolver(SchemaPersonalInformation),
     defaultValues: {
-      name: "Pepe",
+      name: "",
+      lastname: "",
+      email: "",
+      /* name: "Pepe",
       lastname: "Pepardo",
-      email: "pepe@dh.com",
+      email: "pepe@dh.com", */
     },
   });
   const { setFocus, handleSubmit } = methods;
