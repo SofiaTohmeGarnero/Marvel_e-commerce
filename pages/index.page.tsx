@@ -29,7 +29,7 @@ const Index: NextPage<IndexProps> = ({ comicsFirstRender, totalComics }) => {
   };
 
   useEffect(() => {
-    const url = "http://localhost:3000/api/comics?";
+    const url = "/api/comics?";
     const params = new URLSearchParams();
     params.set("offset", `${nextOffset}`);
     params.set("limit", `${LIMIT}`);
