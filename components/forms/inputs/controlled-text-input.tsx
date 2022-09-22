@@ -2,7 +2,7 @@ import { Box, TextField } from "@mui/material";
 import { FC } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
-type ControlledTextInputProps = {
+export type ControlledTextInputProps = {
   name: string;
   label: string;
   defaultValue?: string;
