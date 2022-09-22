@@ -9,6 +9,7 @@ import {
 } from "dh-marvel/components/forms/yup-schemas/schema-personal-information";
 import StepperNavigation from "dh-marvel/components/forms/navigation/stepper-navigation";
 import useStepper from "dh-marvel/components/forms/context/useStepper";
+
 const FormPersonalInformation: FC = () => {
   const { dispatch } = useStepper();
   const methods = useForm<PersonalInformationData>({
@@ -26,6 +27,7 @@ const FormPersonalInformation: FC = () => {
 
   const onSubmit: any = (data: PersonalInformationData) => {
     dispatch({ type: "NEXT_STEP_PERSONAL", payload: data });
+    console.log(data);
   };
 
   useEffect(() => {
