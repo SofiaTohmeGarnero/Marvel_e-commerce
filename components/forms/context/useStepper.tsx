@@ -5,7 +5,7 @@ const useStepper = (): IStepperContext => {
     const context = useContext(StepperContext);
     if (!context) {
         throw new Error(
-            'useOrder must be used within a OrderProvider'
+            'useStepper must be used within a OrderProvider'
         );
     }
     return context;

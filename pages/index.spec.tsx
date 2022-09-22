@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import Index from "dh-marvel/pages/index.page";
 import IComic from "types/IComic";
+import StepperProvider from "dh-marvel/components/forms/context/stepper-context";
 
-const comicsFirstRenderMock:IComic[] = [
+const comicsFirstRenderMock: IComic[] = [
   {
     id: 22582,
     characters: {
@@ -41,7 +42,9 @@ describe("IndexPage", () => {
   describe("when rendering default", () => {
     it("should render the title", () => {
       render(
-        <Index comicsFirstRender={comicsFirstRenderMock} totalComics={4400} />
+        <StepperProvider>
+          <Index comicsFirstRender={comicsFirstRenderMock} totalComics={4400} />
+        </StepperProvider>
       );
       const title = screen.getByText("Comics");
       expect(title).toBeInTheDocument();
@@ -49,7 +52,9 @@ describe("IndexPage", () => {
 
     it("should render the images of the cards", () => {
       render(
-        <Index comicsFirstRender={comicsFirstRenderMock} totalComics={4400} />
+        <StepperProvider>
+          <Index comicsFirstRender={comicsFirstRenderMock} totalComics={4400} />
+        </StepperProvider>
       );
       const cards = screen.getAllByRole(/img/i);
       expect(cards).toHaveLength(comicsFirstRenderMock.length);
@@ -57,7 +62,9 @@ describe("IndexPage", () => {
 
     it("should render the pagination", () => {
       render(
-        <Index comicsFirstRender={comicsFirstRenderMock} totalComics={4400} />
+        <StepperProvider>
+          <Index comicsFirstRender={comicsFirstRenderMock} totalComics={4400} />
+        </StepperProvider>
       );
       const pagination = screen.getByRole(/nav/i);
       expect(pagination).toBeInTheDocument();

@@ -1,6 +1,7 @@
 import IComic from "types/IComic";
 import DetailCard from "dh-marvel/components/cards/detail-card";
 import { render, screen } from "@testing-library/react";
+import StepperProvider from "dh-marvel/components/forms/context/stepper-context";
 
 const itemMockComplete: IComic = {
   id: 1158,
@@ -45,7 +46,11 @@ const itemMockIncomplete: IComic = {
 describe("DetailCard", () => {
   describe("when rendering default", () => {
     it("should render the title and image of the card", () => {
-      render(<DetailCard item={itemMockComplete} />);
+      render(
+        <StepperProvider>
+          <DetailCard item={itemMockComplete} />
+        </StepperProvider>
+      );
       const title = screen.getByText(itemMockComplete.title);
       const image = screen.getByRole(/img/i);
       expect(title).toBeInTheDocument();
@@ -54,7 +59,11 @@ describe("DetailCard", () => {
   });
   describe("when rendering a comic with stock", () => {
     it("should show buy button", () => {
-      render(<DetailCard item={itemMockComplete} />);
+      render(
+        <StepperProvider>
+          <DetailCard item={itemMockComplete} />
+        </StepperProvider>
+      );
       const button = screen.getByText(/comprar/i);
       expect(button).toBeInTheDocument();
     });
@@ -62,14 +71,22 @@ describe("DetailCard", () => {
 
   describe("when rendering a comic without stock", () => {
     it("should show a button that says out of stock", () => {
-      render(<DetailCard item={itemMockIncomplete} />);
+      render(
+        <StepperProvider>
+          <DetailCard item={itemMockIncomplete} />
+        </StepperProvider>
+      );
       const button = screen.getByText(/Sin stock disponible/i);
       expect(button).toBeInTheDocument();
     });
   });
   describe("when rendering a comic whose current price is different to the older", () => {
     it("should render both of prices", () => {
-      render(<DetailCard item={itemMockComplete} />);
+      render(
+        <StepperProvider>
+          <DetailCard item={itemMockComplete} />
+        </StepperProvider>
+      );
       const oldPrice = screen.getByText("Antes $87");
       const price = screen.getByText("$72");
       expect(oldPrice).toBeInTheDocument();
@@ -78,7 +95,11 @@ describe("DetailCard", () => {
   });
   describe("when rendering a comic whose current price is equal to the older", () => {
     it("should render only the current price", () => {
-      render(<DetailCard item={itemMockIncomplete} />);
+      render(
+        <StepperProvider>
+          <DetailCard item={itemMockIncomplete} />
+        </StepperProvider>
+      );
       const oldPrice = screen.queryByText(
         `Antes $${itemMockIncomplete.oldPrice}`
       );
