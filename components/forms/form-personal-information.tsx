@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { FC, useEffect, useContext } from "react";
+import { FC, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-imput";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,10 +8,9 @@ import {
   PersonalInformationData,
 } from "dh-marvel/components/forms/yup-schemas/schema-personal-information";
 import StepperNavigation from "dh-marvel/components/forms/navigation/stepper-navigation";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
-
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 const FormPersonalInformation: FC = () => {
-  const { dispatch } = useContext(StepperContext);
+  const { dispatch } = useStepper();
   const methods = useForm<PersonalInformationData>({
     resolver: yupResolver(SchemaPersonalInformation),
     defaultValues: {
@@ -26,7 +25,6 @@ const FormPersonalInformation: FC = () => {
   const { setFocus, handleSubmit } = methods;
 
   const onSubmit: any = (data: PersonalInformationData) => {
-    //console.log(JSON.stringify(data));
     dispatch({ type: "NEXT_STEP_PERSONAL", payload: data });
   };
 

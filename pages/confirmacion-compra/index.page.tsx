@@ -1,8 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
-import React, { useContext, useEffect } from "react";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -12,9 +11,10 @@ import CheckoutCard from "dh-marvel/components/cards/checkout-card";
 import TextCard from "dh-marvel/components/cards/text-card";
 import { useRouter } from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 
 const SuccessfulPurchase: NextPage = () => {
-  const { state } = useContext(StepperContext);
+  const { state } = useStepper();
   const { customer } = state.checkout;
   const router = useRouter();
 

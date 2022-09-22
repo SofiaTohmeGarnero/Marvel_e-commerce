@@ -1,14 +1,13 @@
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
-import { FC, useContext } from "react";
+import { FC } from "react";
 import FormPersonalInformation from "dh-marvel/components/forms/form-personal-information";
 import FormAddress from "dh-marvel/components/forms/form-address";
 import FormPayment from "dh-marvel/components/forms/form-payment";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 import Grid from "@mui/material/Unstable_Grid2";
 import CheckoutCard from "dh-marvel/components/cards/checkout-card";
-
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 const FormCheckout: FC = () => {
-  const { state } = useContext(StepperContext);
+  const { state } = useStepper();
   const { activeStep } = state;
 
   return (

@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useContext, useState } from "react";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
+import React, { FC, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-imput";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,10 +13,11 @@ import "react-credit-cards/es/styles-compiled.css";
 import Cards from "react-credit-cards";
 import Alert from "@mui/material/Alert";
 import { useRouter } from "next/router";
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 
 const FormPayment: FC = () => {
   const router = useRouter();
-  const { state, dispatch } = useContext(StepperContext);
+  const { state, dispatch } = useStepper();
   const [error, setError] = useState("");
 
   const methods = useForm<PaymentData>({

@@ -1,15 +1,12 @@
 import { FC } from "react";
 import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Unstable_Grid2";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { useContext } from "react";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
-
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 const CheckoutCard: FC = () => {
-  const { state } = useContext(StepperContext);
+  const { state } = useStepper();
   const { order } = state.checkout;
 
   return (

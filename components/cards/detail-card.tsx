@@ -1,6 +1,4 @@
 import type { FC } from "react";
-import { useContext } from "react";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
 import IComic from "types/IComic";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
@@ -12,12 +10,13 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Grid from "@mui/material/Unstable_Grid2";
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 
 type DetailCardProps = {
   item: IComic;
 };
 const DetailCard: FC<DetailCardProps> = ({ item }) => {
-  const { dispatch } = useContext(StepperContext);
+  const { dispatch } = useStepper();
   const handleClick = () => {
     dispatch({ type: "UPLOAD_ORDER", payload: item });
   }

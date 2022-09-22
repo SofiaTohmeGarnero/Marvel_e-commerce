@@ -1,5 +1,4 @@
-import { FC, useEffect, useContext } from "react";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
+import { FC, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import ControlledTextInput from "dh-marvel/components/forms/inputs/controlled-text-imput";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,9 +9,10 @@ import {
   AddressData,
   SchemaAddress,
 } from "dh-marvel/components/forms/yup-schemas/schema-address";
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 
 const FormAddress: FC = () => {
-  const { dispatch } = useContext(StepperContext);
+  const { dispatch } = useStepper();
   const methods = useForm<AddressData>({
     resolver: yupResolver(SchemaAddress),
     defaultValues: {

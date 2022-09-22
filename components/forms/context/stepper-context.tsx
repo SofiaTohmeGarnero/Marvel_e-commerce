@@ -1,17 +1,16 @@
-import {
-  createContext,
-  Dispatch,
-  useReducer,
-} from "react";
+import { createContext, Dispatch, useMemo, useReducer } from "react";
 import { CheckoutInput } from "dh-marvel/types/checkout.types";
+import IComic from "dh-marvel/types/IComic";
+import { PersonalInformationData } from "../yup-schemas/schema-personal-information";
+import { AddressData } from "../yup-schemas/schema-address";
 
 export type TReducerState = {
   activeStep: number;
   checkout: CheckoutInput;
-  comicId: number
+  comicId: number;
 };
 
-const initialState = {
+const initialState: TReducerState = {
   activeStep: 0,
   comicId: 0,
   checkout: {
@@ -41,7 +40,33 @@ const initialState = {
   },
 };
 
-const reducer = (state: any, action: any) => {
+type UploadOrder = {
+  type: "UPLOAD_ORDER";
+  payload: IComic;
+};
+type NextStepPersonal = {
+  type: "NEXT_STEP_PERSONAL";
+  payload: PersonalInformationData;
+};
+type NextStepAddress = {
+  type: "NEXT_STEP_ADDRESS";
+  payload: AddressData;
+};
+type PrevStep = {
+  type: "PREV_STEP";
+};
+type ConfirmPurchase = {
+  type: "CONFIRM_PURCHASE";
+};
+
+type TReducerAction =
+  | UploadOrder
+  | NextStepPersonal
+  | NextStepAddress
+  | PrevStep
+  | ConfirmPurchase;
+
+const reducer = (state: TReducerState, action: TReducerAction) => {
   switch (action.type) {
     case "UPLOAD_ORDER":
       return {
@@ -52,7 +77,10 @@ const reducer = (state: any, action: any) => {
           ...state.checkout,
           order: {
             name: action.payload.title,
-            image: action.payload.thumbnail.path + '.' + action.payload.thumbnail.extension,
+            image:
+              action.payload.thumbnail.path +
+              "." +
+              action.payload.thumbnail.extension,
             price: action.payload.price,
           },
         },
@@ -89,19 +117,6 @@ const reducer = (state: any, action: any) => {
           },
         },
       };
-    case "NEXT_STEP_PAYMENT":
-      return {
-        ...state,
-        checkout: {
-          ...state.checkout,
-          card: {
-            number: action.payload.number,
-            cvc: action.payload.cvc,
-            expDate: action.payload.expDate,
-            nameOnCard: action.payload.nameOnCard,
-          },
-        },
-      };
     case "PREV_STEP":
       return {
         ...state,
@@ -118,25 +133,31 @@ const reducer = (state: any, action: any) => {
             expDate: "",
             nameOnCard: "",
           },
-        }
+        },
       };
     default:
       return state;
   }
 };
-
-export const StepperContext = createContext<{
+export interface IStepperContext {
   state: TReducerState;
-  dispatch: Dispatch<any>;
-}>({
-  state: initialState,
-  dispatch: () => null,
-});
+  dispatch: Dispatch<TReducerAction>;
+}
+
+export const StepperContext = createContext<IStepperContext | undefined>(
+  undefined,
+);
 
 export default function StepperProvider({ children }: any) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const value = useMemo(() => ({
+    state, 
+    dispatch
+}), [state, dispatch])
+
   return (
-    <StepperContext.Provider value={{ state, dispatch }}>
+    <StepperContext.Provider value={value}>
       {children}
     </StepperContext.Provider>
   );

@@ -10,15 +10,13 @@ import Typography from "@mui/material/Typography";
 import IComic from "types/IComic";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
-
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 type ComicCardProps = {
   comic: IComic;
 };
 const ComicCard: FC<ComicCardProps> = ({ comic }) => {
   const router = useRouter();
-  const { dispatch } = useContext(StepperContext);
+  const { dispatch } = useStepper();
   const handleClick = () => {
     fetch(`api/comics/${comic.id}`)
       .then((res) => res.json())

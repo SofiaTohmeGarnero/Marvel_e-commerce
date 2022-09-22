@@ -1,13 +1,13 @@
 import { Button, Stack } from "@mui/material";
-import { FC, useContext } from "react";
-import { StepperContext } from "dh-marvel/components/forms/context/stepper-context";
+import { FC } from "react";
+import useStepper from "dh-marvel/components/forms/context/useStepper";
 
-type StepperNavigationProps = {
+export type StepperNavigationProps = {
   onNextClick: () => void;
 };
 
 const StepperNavigation: FC<StepperNavigationProps> = ({ onNextClick }) => {
-  const { state, dispatch } = useContext(StepperContext);
+  const { state, dispatch } = useStepper();
   const { activeStep } = state;
   return (
     <Stack mt={2} mb={2} direction="row" justifyContent="space-between">
