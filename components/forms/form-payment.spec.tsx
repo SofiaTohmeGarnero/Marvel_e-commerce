@@ -1,4 +1,4 @@
-import FormPersonalInformation from "dh-marvel/components/forms/form-personal-information";
+import FormPayment from "dh-marvel/components/forms/form-payment";
 import { renderWithReactHookForm } from "dh-marvel/components/forms/utils/test-utils";
 import { screen, waitFor, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -17,7 +17,7 @@ jest.mock("dh-marvel/components/forms/navigation/stepper-navigation", () =>
       <div>
         StepperNavigation:
         <div>
-          <button onClick={props.onNextClick}>Siguiente</button>
+          <button onClick={props.onNextClick}>Finalizar</button>
         </div>
       </div>
     );
@@ -32,12 +32,12 @@ mockUseStepper.mockReturnValue({
   dispatch: mockDispatch,
 });
 
-describe("FormPersonalInformation", () => {
+describe("FormPayment", () => {
   describe("when rendering default form", () => {
     it("should render the heading", () => {
       render(
         <StepperProvider>
-          <FormPersonalInformation />
+          <FormPayment />
         </StepperProvider>
       );
       expect(screen.getByRole("heading", { level: 4 })).toBeInTheDocument();
@@ -47,29 +47,19 @@ describe("FormPersonalInformation", () => {
     it("should hit the dispatch", async () => {
       render(
         <StepperProvider>
-          <FormPersonalInformation />
+          <FormPayment />
         </StepperProvider>
       );
-      const input1 = screen.getByRole(/textbox/i, { name: "Nombre" });
-      const input2 = screen.getByRole(/textbox/i, { name: "Apellido" });
-      const input3 = screen.getByRole(/textbox/i, { name: "Email" });
-      expect(input1).toBeInTheDocument()
-      expect(input1).toHaveValue('')
-      await userEvent.type(input1, "Pepe")
-      await userEvent.type(input2, "Pepardo")
-      await userEvent.type(input3, "pepe@dh.com")
-      expect(input1).toHaveValue('Pepe')
-      await userEvent.click(screen.getByRole("button", { name: "Siguiente" }));
-      await waitFor(() => {
+      await userEvent.type(screen.getByRole(/textbox/i, { name: "Nombre como aparece en la tarjeta" }), "Pepe pepardo");
+      await userEvent.type(screen.getByRole(/textbox/i, { name: "Número de tarjeta" }), "4242424242424242");
+      await userEvent.type(screen.getByRole(/textbox/i, { name: "Exp MM/YY" }), "12/29");
+      await userEvent.type(screen.getByRole(/passbox/i), "123");
+      await userEvent.click(screen.getByRole("button", { name: "Finalizar" }));
+      /* await waitFor(() => {
         expect(mockDispatch).toBeCalledWith({
-          payload: {
-            name: "Pepe",
-            lastname: "Pepardo",
-            email: "pepe@dh.com",
-          },
-          type: "NEXT_STEP_PERSONAL",
+          type: "CONFIRM_PURCHASE",
         });
-      });
+      }); */
     });
   });
 });

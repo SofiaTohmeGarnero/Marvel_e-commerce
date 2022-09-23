@@ -1,6 +1,6 @@
 import FormAddress from "dh-marvel/components/forms/form-address";
 import { renderWithReactHookForm } from "dh-marvel/components/forms/utils/test-utils";
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import StepperProvider, {
   TReducerState,
@@ -17,7 +17,6 @@ jest.mock("dh-marvel/components/forms/navigation/stepper-navigation", () =>
       <div>
         StepperNavigation:
         <div>
-          <button onClick={mockDispatch}>Anterior</button>
           <button onClick={props.onNextClick}>Siguiente</button>
         </div>
       </div>
@@ -36,7 +35,7 @@ mockUseStepper.mockReturnValue({
 describe("FormAddress", () => {
   describe("when rendering default form", () => {
     it("should render the heading", () => {
-      renderWithReactHookForm(
+      render(
         <StepperProvider>
           <FormAddress />
         </StepperProvider>
@@ -46,12 +45,11 @@ describe("FormAddress", () => {
   });
   describe("when rendering submitting form", () => {
     it("should hit the dispatch", async () => {
-      renderWithReactHookForm(
+      render(
         <StepperProvider>
           <FormAddress />
         </StepperProvider>
       );
-      screen.debug();
       const input1 = screen.getByRole(/textbox/i, {
         name: "Dirección y número",
       });

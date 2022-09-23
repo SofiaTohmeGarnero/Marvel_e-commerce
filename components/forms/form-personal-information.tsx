@@ -27,7 +27,6 @@ const FormPersonalInformation: FC = () => {
 
   const onSubmit: any = (data: PersonalInformationData) => {
     dispatch({ type: "NEXT_STEP_PERSONAL", payload: data });
-    console.log(data);
   };
 
   useEffect(() => {

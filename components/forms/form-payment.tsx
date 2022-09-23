@@ -90,6 +90,7 @@ const FormPayment: FC = () => {
                   name="cvc"
                   label="CVC"
                   inputType="password"
+                  role="passbox"
                 />
               </Stack>
             </form>
