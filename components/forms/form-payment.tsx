@@ -70,7 +70,7 @@ const FormPayment: FC = () => {
 
   useEffect(() => {
     setFocus("nameOnCard");
-  }, []);
+  }, [setFocus]);
 
   return (
     <Stack>

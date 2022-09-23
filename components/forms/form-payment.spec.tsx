@@ -44,7 +44,7 @@ describe("FormPayment", () => {
     });
   });
   describe("when rendering submitting form", () => {
-    it("should hit the dispatch", async () => {
+    xit("should hit the dispatch", async () => {
       render(
         <StepperProvider>
           <FormPayment />

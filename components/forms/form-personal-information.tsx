@@ -31,7 +31,7 @@ const FormPersonalInformation: FC = () => {
 
   useEffect(() => {
     setFocus("name");
-  }, []);
+  }, [setFocus]);
 
   return (
     <Stack>

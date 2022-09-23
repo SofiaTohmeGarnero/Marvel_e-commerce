@@ -24,6 +24,9 @@ const handlers = [
         if (id === "1") return res(ctx.json({data: {results: [character]}}))
         return res(ctx.json({data: {results: []}}))
     }),
+    rest.get('/api/checkout', async (req, res, ctx) => {
+        return res(ctx.json({}))
+    }),
 ]
 
 export {handlers}

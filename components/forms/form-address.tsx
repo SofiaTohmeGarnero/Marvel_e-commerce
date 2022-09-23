@@ -34,7 +34,7 @@ const FormAddress: FC = () => {
 
   useEffect(() => {
     setFocus("address1");
-  }, []);
+  }, [setFocus]);
   return (
     <Stack>
       <h4>Dirección de entrega</h4>
