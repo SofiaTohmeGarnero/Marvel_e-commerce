@@ -18,7 +18,7 @@ const ComicCard: FC<ComicCardProps> = ({ comic }) => {
   const router = useRouter();
   const { dispatch } = useStepper();
   const handleClick = () => {
-    fetch(`api/comics/${comic.id}`)
+    fetch(`/api/comics/${comic.id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.stock > 0) {
